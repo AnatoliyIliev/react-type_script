@@ -1,5 +1,7 @@
 // import friends from './friends.json';
 import FriendListItem from './FriendListItem';
+// import styles from './Friends.module.css';
+import './Friends.css';
 
 interface Props {
   friends: { avatar: string; name: string; isOnline: boolean; id: number }[];
@@ -7,7 +9,7 @@ interface Props {
 
 function FriendList({ friends }: Props) {
   return (
-    <ul className="friend-list">
+    <ul className="friendList">
       {friends.map(({ avatar, name, isOnline, id }) => (
         <li key={id} className="item">
           <FriendListItem avatar={avatar} name={name} isOnline={isOnline} />

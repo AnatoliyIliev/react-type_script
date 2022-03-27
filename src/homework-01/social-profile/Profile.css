@@ -1,0 +1,15 @@
+.profile {
+  display: block;
+  width: 300px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.description {
+}
+
+.profile_avatar {
+  width: 150px;
+}

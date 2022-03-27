@@ -1,6 +1,4 @@
-// import friends from './friends.json';
 import FriendListItem from './FriendListItem';
-// import styles from './Friends.module.css';
 import './Friends.css';
 
 interface Props {
@@ -18,13 +16,5 @@ function FriendList({ friends }: Props) {
     </ul>
   );
 }
-
-// function FriendList({ avatar, name, isOnline, id }: Props) {
-//   <ul className="friend-list">
-//     {friends.map(friend => {
-//       return friend;
-//     })}
-//   </ul>;
-// }
 
 export default FriendList;

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Components from './Components';
 import 'modern-normalize/modern-normalize.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Components />
   </React.StrictMode>,
   document.getElementById('root'),
 );

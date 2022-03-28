@@ -8,7 +8,7 @@ import user from './homework-01/social-profile/user.json';
 import data from './homework-01/statistics/data.json';
 import transactions from './homework-01/transaction-history/transactions.json';
 
-function App() {
+function Components() {
   return (
     <div>
       <FriendList friends={friends} />
@@ -25,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default Components;

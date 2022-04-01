@@ -37,7 +37,7 @@ class Expresso extends Component<{}, IState> {
   };
 
   render() {
-    const { state } = this;
+    // const { state } = this;
     return (
       <div>
         <h1>Please leave feedback</h1>

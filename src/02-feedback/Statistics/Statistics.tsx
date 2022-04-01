@@ -15,15 +15,10 @@ const Statistics = ({
   total,
   positivePercentage,
 }: IProps) => {
-  const array = Object.keys({
-    good,
-    neutral,
-    bad,
-  });
   return (
     <>
       <ul>
-        {array.map(option => (
+        {['good', 'neutral', 'bad'].map(option => (
           <li key={shortid.generate()}>
             {option[0].toUpperCase() + option.slice(1)}:
             {

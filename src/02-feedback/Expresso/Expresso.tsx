@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Statistics from '../Statistics';
 var shortid = require('shortid');
 
 interface IState {
@@ -37,7 +38,7 @@ class Expresso extends Component<{}, IState> {
   };
 
   render() {
-    const { state } = this;
+    const { good, neutral, bad } = this.state;
     return (
       <div>
         <h1>Please leave feedback</h1>
@@ -57,20 +58,13 @@ class Expresso extends Component<{}, IState> {
         {this.countTotalFeedback() === 0 ? (
           <p>No feedback given</p>
         ) : (
-          <>
-            <ul>
-              {this.options.map(option => (
-                <li key={shortid.generate()}>
-                  {option[0].toUpperCase() + option.slice(1)}:{' '}
-                  {[state[option as keyof IState]]}
-                </li>
-              ))}
-            </ul>
-            <p>Total: {this.countTotalFeedback()}</p>
-            <p>
-              Positive percentage: {this.countPositiveFeedbackPercentage()}%
-            </p>
-          </>
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          />
         )}
       </div>
     );

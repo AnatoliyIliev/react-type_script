@@ -37,7 +37,7 @@ class Expresso extends Component<{}, IState> {
   };
 
   render() {
-    // const { state } = this;
+    const { state } = this;
     return (
       <div>
         <h1>Please leave feedback</h1>
@@ -54,14 +54,15 @@ class Expresso extends Component<{}, IState> {
         ))}
 
         <h2>Statistics</h2>
-        {this.countTotalFeedback() < 0 ? (
+        {this.countTotalFeedback() === 0 ? (
           <p>No feedback given</p>
         ) : (
           <>
             <ul>
               {this.options.map(option => (
                 <li key={shortid.generate()}>
-                  {option[0].toUpperCase() + option.slice(1)}: {option}
+                  {option[0].toUpperCase() + option.slice(1)}:{' '}
+                  {[state[option as keyof IState]]}
                 </li>
               ))}
             </ul>

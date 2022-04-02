@@ -1,12 +1,12 @@
-import FriendList from './homework-01/friend-list/FriendList';
-import Profile from './homework-01/social-profile/Profile';
-import Statistics from './homework-01/statistics/Statistics';
-import TransactionHistory from './homework-01/transaction-history/TransactionHistory';
+import FriendList from './01-components/friend-list/FriendList';
+import Profile from './01-components/social-profile/Profile';
+import Statistics from './01-components/statistics/Statistics';
+import TransactionHistory from './01-components/transaction-history/TransactionHistory';
 
-import friends from './homework-01/friend-list/friends.json';
-import user from './homework-01/social-profile/user.json';
-import data from './homework-01/statistics/data.json';
-import transactions from './homework-01/transaction-history/transactions.json';
+import friends from './01-components/friend-list/friends.json';
+import user from './01-components/social-profile/user.json';
+import data from './01-components/statistics/data.json';
+import transactions from './01-components/transaction-history/transactions.json';
 
 function Components() {
   return (

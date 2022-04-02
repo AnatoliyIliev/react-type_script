@@ -2,6 +2,7 @@
   "name": "react-type_script",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://anatoliyiliev.github.io/react-type_script/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -22,7 +23,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -43,7 +46,9 @@
     ]
   },
   "devDependencies": {
+    "@types/shortid": "^0.0.29",
     "eslint": "^8.11.0",
+    "gh-pages": "^3.2.3",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
     "prettier": "^2.6.0",

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FeedbackOptions from '../FeedbackOptions';
 import Statistics from '../Statistics';
+import Notification from '../Notification';
+import Section from '../Section';
 
 interface IState {
   good: number;
@@ -41,25 +43,25 @@ class Expresso extends Component<{}, IState> {
     const { good, neutral, bad } = this.state;
     return (
       <div>
-        <h1>Please leave feedback</h1>
-
-        <FeedbackOptions
-          options={Object.keys(this.state)}
-          onLeaveFeedback={this.leaveFeedback}
-        />
-
-        <h2>Statistics</h2>
-        {this.countTotalFeedback() === 0 ? (
-          <p>No feedback given</p>
-        ) : (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={this.countTotalFeedback()}
-            positivePercentage={this.countPositiveFeedbackPercentage()}
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.leaveFeedback}
           />
-        )}
+        </Section>
+        <Section title="Statistics">
+          {this.countTotalFeedback() === 0 ? (
+            <Notification message="There is no feedback" />
+          ) : (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          )}
+        </Section>
       </div>
     );
   }

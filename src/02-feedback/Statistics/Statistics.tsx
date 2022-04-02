@@ -20,7 +20,7 @@ const Statistics = ({
       <ul>
         {['good', 'neutral', 'bad'].map(option => (
           <li key={shortid.generate()}>
-            {option[0].toUpperCase() + option.slice(1)}:
+            {option[0].toUpperCase() + option.slice(1)}:{' '}
             {
               {
                 good,

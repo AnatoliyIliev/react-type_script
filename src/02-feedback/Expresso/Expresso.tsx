@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import FeedbackOptions from '../FeedbackOptions';
 import Statistics from '../Statistics';
-var shortid = require('shortid');
 
 interface IState {
   good: number;
@@ -17,7 +17,7 @@ class Expresso extends Component<{}, IState> {
 
   options = Object.keys(this.state);
 
-  handleChange = (option: string) => {
+  leaveFeedback = (option: string) => {
     this.setState((prevState: any) => {
       return {
         ...prevState,
@@ -43,16 +43,10 @@ class Expresso extends Component<{}, IState> {
       <div>
         <h1>Please leave feedback</h1>
 
-        {this.options.map(option => (
-          <button
-            type="button"
-            name={option}
-            key={shortid.generate()}
-            onClick={() => this.handleChange(option)}
-          >
-            {option[0].toUpperCase() + option.slice(1)}
-          </button>
-        ))}
+        <FeedbackOptions
+          options={Object.keys(this.state)}
+          onLeaveFeedback={this.leaveFeedback}
+        />
 
         <h2>Statistics</h2>
         {this.countTotalFeedback() === 0 ? (

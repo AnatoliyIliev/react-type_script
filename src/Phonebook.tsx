@@ -26,12 +26,17 @@ class Phonebook extends Component<{}, IState> {
 
   submitForm = (data: { name: string; number: string }) => {
     const { name, number } = data;
-
+    const { contacts } = this.state;
     const contact = {
       id: nanoid(),
       name: name,
       number: number,
     };
+
+    if (contacts.find(con => con.name === contact.name)) {
+      alert(`${contact.name} is already in contacts!`);
+      return;
+    }
 
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contact],

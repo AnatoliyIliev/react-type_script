@@ -52,6 +52,12 @@ class Phonebook extends Component<{}, IState> {
     );
   };
 
+  deleteContact = (id: string) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   render() {
     const { filter } = this.state;
 
@@ -61,7 +67,10 @@ class Phonebook extends Component<{}, IState> {
         <ContactForm onSubmitForm={this.submitForm} />
         <h1>Contacts</h1>
         <Filter value={filter} onChangeFilter={this.changeFilter} />
-        <ContactList contacts={this.getVisibleContacts()} />
+        <ContactList
+          contacts={this.getVisibleContacts()}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }

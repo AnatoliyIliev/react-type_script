@@ -6,15 +6,19 @@ interface IProps {
     name: string;
     number: string;
   }[];
+  onDeleteContact: (id: string) => void;
 }
 
-const ContactList = ({ contacts }: IProps) => {
+const ContactList = ({ contacts, onDeleteContact }: IProps) => {
   return (
     <div>
       <ul>
-        {contacts.map(contact => (
+        {contacts.map(({ id, name, number }) => (
           <li key={nanoid()}>
-            {contact.name}: {contact.number}
+            {name}: {number}
+            <button type="button" onClick={() => onDeleteContact(id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>

@@ -1,3 +1,4 @@
+import '../Phonebook.css';
 import { nanoid } from 'nanoid';
 
 interface IProps {
@@ -12,11 +13,15 @@ interface IProps {
 const ContactList = ({ contacts, onDeleteContact }: IProps) => {
   return (
     <div>
-      <ul>
+      <ul className="contact_list">
         {contacts.map(({ id, name, number }) => (
           <li key={nanoid()}>
             {name}: {number}
-            <button type="button" onClick={() => onDeleteContact(id)}>
+            <button
+              className="contact_list-button"
+              type="button"
+              onClick={() => onDeleteContact(id)}
+            >
               Delete
             </button>
           </li>

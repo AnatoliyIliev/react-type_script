@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import '../Phonebook.css';
 
 interface IProps {
   onSubmitForm: (state: { name: string; number: string }) => void;
@@ -45,10 +46,11 @@ class ContactForm extends Component<IProps, IState> {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form className="form" onSubmit={this.handleSubmit}>
+        <label className="form_contact">
           Name
           <input
+            className="form_contact-input"
             type="text"
             name="name"
             value={name}
@@ -58,9 +60,10 @@ class ContactForm extends Component<IProps, IState> {
             required
           />
         </label>
-        <label>
+        <label className="form_contact">
           Number
           <input
+            className="form_contact-input"
             type="tel"
             name="number"
             value={number}
@@ -70,7 +73,9 @@ class ContactForm extends Component<IProps, IState> {
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button className="form_contact-button" type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

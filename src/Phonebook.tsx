@@ -4,6 +4,7 @@ import Filter from './02-phonebook/Filter';
 import ContactList from './02-phonebook/ContactList';
 import initialContacts from './02-phonebook/initialContacts.json';
 import { nanoid } from 'nanoid';
+import './02-phonebook/Phonebook.css';
 
 interface IState {
   contacts: {
@@ -62,7 +63,7 @@ class Phonebook extends Component<{}, IState> {
     const { filter } = this.state;
 
     return (
-      <div>
+      <div className="phonebook">
         <h1>Phonebook</h1>
         <ContactForm onSubmitForm={this.submitForm} />
         <h1>Contacts</h1>

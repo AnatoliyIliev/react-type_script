@@ -1,3 +1,5 @@
+import '../Phonebook.css';
+
 interface IProps {
   value: string;
   onChangeFilter: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -5,9 +7,14 @@ interface IProps {
 
 const Filter = ({ value, onChangeFilter }: IProps) => {
   return (
-    <label>
+    <label className="find_contact">
       Find contacts by name{' '}
-      <input type="text" value={value} onChange={onChangeFilter} />
+      <input
+        className="find_contact-input"
+        type="text"
+        value={value}
+        onChange={onChangeFilter}
+      />
     </label>
   );
 };

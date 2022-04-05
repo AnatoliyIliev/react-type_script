@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ContactForm from './02-phonebook/ContactForm';
+import Filter from './02-phonebook/Filter';
 import initialContacts from './02-phonebook/initialContacts.json';
 import { nanoid } from 'nanoid';
 
@@ -54,10 +55,7 @@ class Phonebook extends Component<{}, IState> {
         <h1>Phonebook</h1>
         <ContactForm onSubmitForm={this.submitForm} />
         <h1>Contacts</h1>
-        <label>
-          Find contacts by name{' '}
-          <input type="text" value={filter} onChange={this.changeFilter} />
-        </label>
+        <Filter value={filter} onChangeFilter={this.changeFilter} />
 
         {contacts && (
           <ul>

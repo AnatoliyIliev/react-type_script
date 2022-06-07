@@ -1,4 +1,4 @@
-var shortid = require('shortid');
+const { v4: uuidv4 } = require('uuid');
 
 interface IProps {
   options: string[];
@@ -11,7 +11,7 @@ const FeedbackOptions = ({ options, onLeaveFeedback }: IProps) => (
       <button
         type="button"
         name={option}
-        key={shortid.generate()}
+        key={uuidv4()}
         onClick={() => onLeaveFeedback(option)}
       >
         {option[0].toUpperCase() + option.slice(1)}

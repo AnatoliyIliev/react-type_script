@@ -1,4 +1,4 @@
-var shortid = require('shortid');
+const { v4: uuidv4 } = require('uuid');
 
 interface IProps {
   good: number;
@@ -19,7 +19,7 @@ const Statistics = ({
     <>
       <ul>
         {['good', 'neutral', 'bad'].map(option => (
-          <li key={shortid.generate()}>
+          <li key={uuidv4()}>
             {option[0].toUpperCase() + option.slice(1)}:{' '}
             {
               {

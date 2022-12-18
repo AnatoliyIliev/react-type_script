@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import '../ImageFinder.css';
-class Searchbar extends Component {
+import { IPropsSearch } from '../types';
+
+class Searchbar extends Component<IPropsSearch> {
   state = {
     searchQuery: '',
   };
@@ -12,6 +14,8 @@ class Searchbar extends Component {
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    this.props.onSubmit(this.state.searchQuery);
 
     this.setState({ searchQuery: '' });
   };

@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-// import './03-image-finder/ImageFinder.css';
 import Searchbar from './03-image-finder/Searchbar';
-import PixabayAPI from './03-image-finder/services/PixabayAPI';
+import ImageGallery from './03-image-finder/ImageGallery';
 
-class ImageFinder extends Component {
-  findURL() {
-    try {
-      PixabayAPI('cat').then(data => console.log(data));
-    } catch (error) {
-      throw new Error('Error');
-    }
-  }
+import { IProps } from './03-image-finder/types';
+
+class ImageFinder extends Component<IProps> {
+  state = {
+    searchQuery: '',
+  };
+
+  submitForm = (searchQuery: string) => {
+    this.setState({ searchQuery: searchQuery });
+  };
 
   render() {
+    const { searchQuery } = this.state;
+
     return (
       <>
-        <Searchbar />
+        <Searchbar onSubmit={this.submitForm} />
+        <ImageGallery searchQuery={searchQuery} />
       </>
     );
   }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PixabayAPI from '../services/PixabayAPI';
-import '../ImageFinder.css';
 import ImageGalleryItem from '../ImageGalleryItem';
+import Button from '../Button';
+import '../ImageFinder.css';
+
 import { IQuery } from '../types';
 
 class ImageGallery extends Component<IQuery> {
@@ -19,7 +21,6 @@ class ImageGallery extends Component<IQuery> {
       const { page } = this.state;
       try {
         PixabayAPI(nexQuery, page).then(data => {
-          console.log('data', data.hits);
           this.setState({ PixabayImage: data.hits });
         });
       } catch (error) {
@@ -30,10 +31,14 @@ class ImageGallery extends Component<IQuery> {
 
   render() {
     const { PixabayImage } = this.state;
+
     return (
-      <ul className="ImageGallery">
-        {PixabayImage && <ImageGalleryItem PixabayImage={PixabayImage} />}
-      </ul>
+      <>
+        <ul className="ImageGallery">
+          <ImageGalleryItem PixabayImage={PixabayImage} />
+        </ul>
+        <Button />
+      </>
     );
   }
 }

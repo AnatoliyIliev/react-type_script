@@ -29,13 +29,8 @@ export interface IQuery {
 }
 
 export interface IGallery {
-  PixabayImage: [] | IPixabay[];
+  PixabayImage: IPixabay[];
 }
-
-// export interface IPropsGallery {
-//   PixabayImage?: [] | IPixabay[];
-//   searchQuery: string;
-// }
 
 export interface IProps {
   onSubmit?: (searchQuery: string) => void;

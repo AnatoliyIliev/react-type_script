@@ -1,7 +1,7 @@
 import '../ImageFinder.css';
-import { IGallery } from '../types';
+import { IPropsGallery } from '../types';
 
-const ImageGalleryItem = ({ PixabayImage }: IGallery) => {
+const ImageGalleryItem = ({ PixabayImage }: IPropsGallery) => {
   return (
     <>
       {PixabayImage.map(item => (

@@ -4,30 +4,49 @@ import ImageGalleryItem from '../ImageGalleryItem';
 import Button from '../Button';
 import '../ImageFinder.css';
 
-import { IQuery } from '../types';
+import { IPropsQuery, IState } from '../types';
 
-class ImageGallery extends Component<IQuery> {
+class ImageGallery extends Component<IPropsQuery, IState> {
   state = {
     page: 1,
     PixabayImage: [],
-    error: null,
   };
 
-  componentDidUpdate(prevProps: IQuery) {
+  componentDidUpdate(prevProps: IPropsQuery) {
     const prevQuery = prevProps.searchQuery;
     const nexQuery = this.props.searchQuery;
 
     if (prevQuery !== nexQuery) {
-      const { page } = this.state;
-      try {
-        PixabayAPI(nexQuery, page).then(data => {
-          this.setState({ PixabayImage: data.hits });
-        });
-      } catch (error) {
-        this.setState({ error });
-      }
+      this.setState({
+        PixabayImage: [],
+        page: 1,
+      });
+
+      this.fetchUpdate();
     }
   }
+
+  fetchUpdate = async () => {
+    const nexQuery = this.props.searchQuery;
+    const { page } = this.state;
+
+    try {
+      const image = await PixabayAPI(nexQuery, page);
+      let resetPage = page;
+
+      this.setState(prevState => {
+        if (prevState.page < page) {
+          resetPage = 1;
+        }
+        return {
+          PixabayImage: [...prevState.PixabayImage, ...image.hits],
+          page: prevState.page + 1,
+        };
+      });
+    } catch (error) {
+      // this.setState({ error });
+    }
+  };
 
   render() {
     const { PixabayImage } = this.state;
@@ -37,7 +56,7 @@ class ImageGallery extends Component<IQuery> {
         <ul className="ImageGallery">
           <ImageGalleryItem PixabayImage={PixabayImage} />
         </ul>
-        <Button />
+        <Button onClick={this.fetchUpdate} />
       </>
     );
   }

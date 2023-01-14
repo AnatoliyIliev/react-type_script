@@ -12,7 +12,7 @@ class ImageFinder extends Component<IProps> {
   };
 
   submitForm = (searchQuery: string) => {
-    this.setState({ searchQuery: searchQuery });
+    this.setState({ searchQuery });
   };
 
   render() {

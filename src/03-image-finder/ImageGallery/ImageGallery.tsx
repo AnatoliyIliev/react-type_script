@@ -12,14 +12,17 @@ class ImageGallery extends Component<IPropsQuery, IState> {
     PixabayImage: [],
   };
 
+  resetPage = () => {
+    this.setState({ page: 1 });
+  };
+
   componentDidUpdate(prevProps: IPropsQuery) {
     const prevQuery = prevProps.searchQuery;
-    const nexQuery = this.props.searchQuery;
+    const nextQuery = this.props.searchQuery;
 
-    if (prevQuery !== nexQuery) {
+    if (prevQuery !== nextQuery) {
       this.setState({
         PixabayImage: [],
-        page: 1,
       });
 
       this.fetchUpdate();
@@ -27,22 +30,15 @@ class ImageGallery extends Component<IPropsQuery, IState> {
   }
 
   fetchUpdate = async () => {
-    const nexQuery = this.props.searchQuery;
+    const nextQuery = this.props.searchQuery;
     const { page } = this.state;
-
     try {
-      const image = await PixabayAPI(nexQuery, page);
-      let resetPage = page;
+      const image = await PixabayAPI(nextQuery, page);
 
-      this.setState(prevState => {
-        if (prevState.page < page) {
-          resetPage = 1;
-        }
-        return {
-          PixabayImage: [...prevState.PixabayImage, ...image.hits],
-          page: prevState.page + 1,
-        };
-      });
+      this.setState(prevState => ({
+        PixabayImage: [...prevState.PixabayImage, ...image.hits],
+        page: prevState.page + 1,
+      }));
     } catch (error) {
       // this.setState({ error });
     }

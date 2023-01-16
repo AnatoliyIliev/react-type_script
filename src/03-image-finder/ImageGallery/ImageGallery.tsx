@@ -10,11 +10,12 @@ class ImageGallery extends Component<IPropsQuery, IState> {
   state = {
     page: 1,
     PixabayImage: [],
+    perPage: 12,
   };
 
-  resetPage = () => {
-    this.setState({ page: 1 });
-  };
+  // resetPage = () => {
+  //   this.setState({ page: 1 });
+  // };
 
   componentDidUpdate(prevProps: IPropsQuery) {
     const prevQuery = prevProps.searchQuery;
@@ -31,9 +32,10 @@ class ImageGallery extends Component<IPropsQuery, IState> {
 
   fetchUpdate = async () => {
     const nextQuery = this.props.searchQuery;
-    const { page } = this.state;
+    const { page, perPage } = this.state;
+
     try {
-      const image = await PixabayAPI(nextQuery, page);
+      const image = await PixabayAPI(nextQuery, page, perPage);
 
       this.setState(prevState => ({
         PixabayImage: [...prevState.PixabayImage, ...image.hits],
@@ -45,14 +47,15 @@ class ImageGallery extends Component<IPropsQuery, IState> {
   };
 
   render() {
-    const { PixabayImage } = this.state;
+    const { PixabayImage, perPage } = this.state;
+    const LoadMoreButton = !(PixabayImage.length < perPage);
 
     return (
       <>
         <ul className="ImageGallery">
           <ImageGalleryItem PixabayImage={PixabayImage} />
         </ul>
-        <Button onClick={this.fetchUpdate} />
+        {LoadMoreButton && <Button onClick={this.fetchUpdate} />}
       </>
     );
   }

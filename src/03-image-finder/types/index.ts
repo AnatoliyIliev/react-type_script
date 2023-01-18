@@ -24,23 +24,26 @@ export interface IPixabay {
   userImageURL: string;
 }
 
-export interface IPropsQuery {
+export interface IQuery {
   searchQuery: string;
 }
 
 export interface IPropsGallery {
-  PixabayImage: IPixabay[];
+  PixabayImage: [] | IPixabay[];
 }
 
 export interface IProps {
   onSubmit?: (searchQuery: string) => void;
   searchQuery?: string;
   onClick?: () => void;
+  PixabayImage?: [] | IPixabay[];
 }
 
 export interface IState {
-  page: number;
+  searchQuery: string;
   PixabayImage: [] | IPixabay[];
+  perPage: number;
+  page: number;
 }
 
 export interface IPropsSearch {

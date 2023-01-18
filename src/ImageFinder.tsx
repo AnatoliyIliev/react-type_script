@@ -3,6 +3,7 @@ import Searchbar from './03-image-finder/Searchbar';
 import PixabayAPI from './03-image-finder/services/PixabayAPI';
 import ImageGallery from './03-image-finder/ImageGallery';
 import Button from './03-image-finder/Button';
+import Loader from './03-image-finder/Loader';
 
 import './03-image-finder/ImageFinder.css';
 
@@ -14,6 +15,7 @@ class ImageFinder extends Component<IProps, IState> {
     PixabayImage: [],
     perPage: 12,
     page: 1,
+    loader: false,
   };
 
   submitForm = (searchQuery: string) => {
@@ -35,6 +37,7 @@ class ImageFinder extends Component<IProps, IState> {
 
   fetchUpdate = async () => {
     const { searchQuery, page, perPage } = this.state;
+    this.setState({ loader: true });
 
     try {
       const image = await PixabayAPI(searchQuery, page, perPage);
@@ -45,17 +48,20 @@ class ImageFinder extends Component<IProps, IState> {
       }));
     } catch (error) {
       // this.setState({ error });
+    } finally {
+      this.setState({ loader: false });
     }
   };
 
   render() {
-    const { PixabayImage, perPage } = this.state;
+    const { PixabayImage, perPage, loader } = this.state;
     const LoadMoreButton = !(PixabayImage.length < perPage);
 
     return (
       <div className="App">
         <Searchbar onSubmit={this.submitForm} />
         {LoadMoreButton && <ImageGallery PixabayImage={PixabayImage} />}
+        {loader && <Loader />}
         {LoadMoreButton && <Button onClick={this.fetchUpdate} />}
       </div>
     );

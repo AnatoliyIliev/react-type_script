@@ -44,6 +44,7 @@ export interface IState {
   PixabayImage: [] | IPixabay[];
   perPage: number;
   page: number;
+  loader: boolean;
 }
 
 export interface IPropsSearch {

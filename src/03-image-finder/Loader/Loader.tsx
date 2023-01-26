@@ -1,12 +1,15 @@
-import { RotatingLines } from 'react-loader-spinner';
+import { TailSpin } from 'react-loader-spinner';
+import '../ImageFinder.css';
 
 function Loader() {
   return (
-    <RotatingLines
-      strokeColor="grey"
-      strokeWidth="5"
-      animationDuration="0.75"
-      width="96"
+    <TailSpin
+      height="80"
+      width="80"
+      color="#4fa94d"
+      ariaLabel="tail-spin-loading"
+      radius="1"
+      wrapperClass="Loader"
       visible={true}
     />
   );

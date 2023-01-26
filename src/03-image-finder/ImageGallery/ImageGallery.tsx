@@ -1,16 +1,31 @@
+import React, { Component } from 'react';
 import ImageGalleryItem from '../ImageGalleryItem';
 import '../ImageFinder.css';
 
-import { IPropsGallery } from '../types';
+import { IPropsGallery, IPropsImage } from '../types';
 
-function ImageGallery({ PixabayImage }: IPropsGallery) {
-  return (
-    <>
-      <ul className="ImageGallery">
-        <ImageGalleryItem PixabayImage={PixabayImage} />
-      </ul>
-    </>
-  );
+class ImageGallery extends Component<IPropsGallery> {
+  handleItemClick = (event: React.MouseEvent) => {
+    const target = event.target as HTMLElement;
+
+    this.props.PixabayImage.forEach(({ id, largeImageURL, tags }) => {
+      if (id === Number(target.id)) {
+        // this.props.changeLargeImage<IPropsImage>();
+        // console.log(largeImageURL);
+        // console.log(tags);
+      }
+    });
+  };
+
+  render() {
+    return (
+      <>
+        <ul className="ImageGallery" onClick={this.handleItemClick}>
+          <ImageGalleryItem PixabayImage={this.props.PixabayImage} />
+        </ul>
+      </>
+    );
+  }
 }
 
 export default ImageGallery;

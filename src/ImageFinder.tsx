@@ -16,9 +16,10 @@ class ImageFinder extends Component<IProps, IState> {
     PixabayImage: [],
     perPage: 12,
     page: 1,
+    error: '',
     loader: false,
     showModal: false,
-    largeImage: [],
+    largeImage: { largeImageURL: '', tags: '' },
   };
 
   componentDidUpdate(prevProps: IQuery, prevState: IQuery) {
@@ -46,7 +47,13 @@ class ImageFinder extends Component<IProps, IState> {
         page: prevState.page + 1,
       }));
     } catch (error) {
-      // this.setState({ error });
+      let message = '';
+
+      if (error instanceof Error) {
+        message = error.message;
+      }
+
+      this.setState({ error: message });
     } finally {
       this.setState({ loader: false });
     }
@@ -63,18 +70,26 @@ class ImageFinder extends Component<IProps, IState> {
   };
 
   changeLargeImage = (largeImageURL: string, tags: string) => {
-    // this.setState({ largeImage: [largeImageURL, tags] });
+    this.setState({ largeImage: { largeImageURL, tags } });
+    this.toggleModal();
   };
 
   render() {
-    const { PixabayImage, perPage, loader, showModal } = this.state;
+    const { PixabayImage, perPage, loader, showModal, largeImage } = this.state;
     const LoadMoreButton = !(PixabayImage.length < perPage);
 
     return (
       <div className="App">
-        {showModal && <Modal onClose={this.toggleModal}> Hello Modal </Modal>}
+        {showModal && (
+          <Modal onClose={this.toggleModal} image={largeImage}></Modal>
+        )}
         <Searchbar onSubmit={this.submitForm} />
-        {LoadMoreButton && <ImageGallery PixabayImage={PixabayImage} />}
+        {LoadMoreButton && (
+          <ImageGallery
+            PixabayImage={PixabayImage}
+            changeLargeImage={this.changeLargeImage}
+          />
+        )}
         {loader && <Loader />}
         {LoadMoreButton && <Button onClick={this.fetchUpdate} />}
       </div>

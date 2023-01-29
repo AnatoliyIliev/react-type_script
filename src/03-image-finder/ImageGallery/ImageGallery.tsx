@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ImageGalleryItem from '../ImageGalleryItem';
 import '../ImageFinder.css';
 
-import { IPropsGallery, IPropsImage } from '../types';
+import { IPropsGallery } from '../types';
 
 class ImageGallery extends Component<IPropsGallery> {
   handleItemClick = (event: React.MouseEvent) => {
@@ -10,9 +10,7 @@ class ImageGallery extends Component<IPropsGallery> {
 
     this.props.PixabayImage.forEach(({ id, largeImageURL, tags }) => {
       if (id === Number(target.id)) {
-        // this.props.changeLargeImage<IPropsImage>();
-        // console.log(largeImageURL);
-        // console.log(tags);
+        this.props.changeLargeImage!(largeImageURL, tags);
       }
     });
   };

@@ -28,25 +28,22 @@ export interface IQuery {
   searchQuery: string;
 }
 
+export interface IPropsGallery {
+  PixabayImage: [] | IPixabay[];
+  changeLargeImage?: (largeImageURL: string, tags: string) => void;
+}
+
 export type largeImage = {
   largeImageURL: string;
   tags: string;
 };
-
-export interface IPropsGallery {
-  PixabayImage: [] | IPixabay[];
-}
-
-export interface IPropsImage {
-  changeLargeImage: () => void;
-}
 
 export interface IProps {
   onSubmit?: (searchQuery: string) => void;
   searchQuery?: string;
   onClick?: () => void;
   PixabayImage?: [] | IPixabay[];
-  // changeLargeImage?: () => void;
+  changeLargeImage?: (largeImageURL: string, tags: string) => void;
 }
 
 export interface IState {
@@ -54,9 +51,10 @@ export interface IState {
   PixabayImage: [] | IPixabay[];
   perPage: number;
   page: number;
+  error: string;
   loader: boolean;
   showModal: boolean;
-  largeImage: largeImage[];
+  largeImage: largeImage;
 }
 
 export interface IPropsSearch {
@@ -65,4 +63,5 @@ export interface IPropsSearch {
 
 export interface IPropsModal {
   onClose: () => void;
+  image?: largeImage;
 }

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { IPropsModal } from '../types';
 import '../ImageFinder.css';
 
-const modalRoot = document.querySelector('modal-root');
+const modalRoot = document.getElementById('modal-root');
 
 class Modal extends Component<IPropsModal> {
   componentDidMount() {
@@ -28,10 +28,14 @@ class Modal extends Component<IPropsModal> {
   };
 
   render() {
-    // const { largeImage, tags } = this.props;
+    const { largeImageURL, tags } = this.props.image!;
+
     return createPortal(
       <div className="Overlay" onClick={this.handleBackdropClick}>
-        <div className="Modal">{/* <img src={largeImage} alt={tags} /> */}</div>
+        <div className="Modal">
+          Hello
+          <img src={largeImageURL} alt={tags} />
+        </div>
       </div>,
       modalRoot as Element,
     );

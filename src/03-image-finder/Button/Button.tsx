@@ -3,6 +3,12 @@ import '../ImageFinder.css';
 import { IProps } from '../types';
 
 class Button extends Component<IProps> {
+  componentDidMount() {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  }
   render() {
     return (
       <div className="Button-center">

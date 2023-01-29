@@ -52,9 +52,9 @@ export interface IState {
   perPage: number;
   page: number;
   error: string;
-  loader: boolean;
   showModal: boolean;
   largeImage: largeImage;
+  status: string;
 }
 
 export interface IPropsSearch {

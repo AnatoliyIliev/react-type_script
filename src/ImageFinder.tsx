@@ -17,9 +17,9 @@ class ImageFinder extends Component<IProps, IState> {
     perPage: 12,
     page: 1,
     error: '',
-    loader: false,
     showModal: false,
     largeImage: { largeImageURL: '', tags: '' },
+    status: 'idle',
   };
 
   componentDidUpdate(prevProps: IQuery, prevState: IQuery) {
@@ -37,7 +37,7 @@ class ImageFinder extends Component<IProps, IState> {
 
   fetchUpdate = async () => {
     const { searchQuery, page, perPage } = this.state;
-    this.setState({ loader: true });
+    this.setState({ status: 'pending' });
 
     try {
       const image = await PixabayAPI(searchQuery, page, perPage);
@@ -45,6 +45,7 @@ class ImageFinder extends Component<IProps, IState> {
       this.setState(prevState => ({
         PixabayImage: [...prevState.PixabayImage, ...image.hits],
         page: prevState.page + 1,
+        status: 'resolved',
       }));
     } catch (error) {
       let message = '';
@@ -53,9 +54,7 @@ class ImageFinder extends Component<IProps, IState> {
         message = error.message;
       }
 
-      this.setState({ error: message });
-    } finally {
-      this.setState({ loader: false });
+      this.setState({ error: message, status: 'rejected' });
     }
   };
 
@@ -75,23 +74,28 @@ class ImageFinder extends Component<IProps, IState> {
   };
 
   render() {
-    const { PixabayImage, perPage, loader, showModal, largeImage } = this.state;
-    const LoadMoreButton = !(PixabayImage.length < perPage);
+    const { PixabayImage, showModal, largeImage, status, error } = this.state;
 
     return (
       <div className="App">
+        <Searchbar onSubmit={this.submitForm} />
+        {status === 'idle' && <div>Enter data to search</div>}
+
+        {status === 'rejected' && error}
+
+        {status === 'resolved' && (
+          <>
+            <ImageGallery
+              PixabayImage={PixabayImage}
+              changeLargeImage={this.changeLargeImage}
+            />
+            <Button onClick={this.fetchUpdate} />
+          </>
+        )}
+        {status === 'pending' && <Loader />}
         {showModal && (
           <Modal onClose={this.toggleModal} image={largeImage}></Modal>
         )}
-        <Searchbar onSubmit={this.submitForm} />
-        {LoadMoreButton && (
-          <ImageGallery
-            PixabayImage={PixabayImage}
-            changeLargeImage={this.changeLargeImage}
-          />
-        )}
-        {loader && <Loader />}
-        {LoadMoreButton && <Button onClick={this.fetchUpdate} />}
       </div>
     );
   }

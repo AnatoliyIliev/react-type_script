@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Searchbar from './03-image-finder/Searchbar';
-import PixabayAPI from './03-image-finder/services/PixabayAPI';
-import ImageGallery from './03-image-finder/ImageGallery';
-import Button from './03-image-finder/Button';
-import Loader from './03-image-finder/Loader';
-import Modal from './03-image-finder/Modal';
+import Searchbar from './Searchbar';
+import PixabayAPI from './services/PixabayAPI';
+import ImageGallery from './ImageGallery';
+import Button from './Button';
+import Loader from './Loader';
+import Modal from './Modal';
 
 import './03-image-finder/ImageFinder.css';
 
-import { IProps, IQuery, IState } from './03-image-finder/types';
+import { IProps, IQuery, IState } from './types';
 
 class ImageFinder extends Component<IProps, IState> {
   state = {

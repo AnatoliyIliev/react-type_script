@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ImageFinder from './ImageFinder';
+import ImageFinder from './03-image-finder/ImageFinder';
 import './index.css';
 import 'modern-normalize/modern-normalize.css';
 

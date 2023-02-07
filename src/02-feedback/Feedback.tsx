@@ -1,4 +1,4 @@
-import Expresso from './02-feedback/Expresso';
+import Expresso from './Expresso';
 
 function Feedback() {
   return (

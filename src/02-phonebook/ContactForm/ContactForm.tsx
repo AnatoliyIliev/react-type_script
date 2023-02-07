@@ -17,8 +17,6 @@ class ContactForm extends Component<IProps, IState> {
   };
 
   handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    // const { name, value } = event.currentTarget;
-    // this.setState({ [name]: value });
     const { value } = event.currentTarget;
     this.setState({ name: value });
   };

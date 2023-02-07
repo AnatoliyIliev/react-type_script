@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ContactForm from './02-phonebook/ContactForm';
-import Filter from './02-phonebook/Filter';
-import ContactList from './02-phonebook/ContactList';
-import initialContacts from './02-phonebook/initialContacts.json';
+import ContactForm from './ContactForm';
+import Filter from './Filter';
+import ContactList from './ContactList';
+import initialContacts from './initialContacts.json';
 import { nanoid } from 'nanoid';
 import './02-phonebook/Phonebook.css';
 

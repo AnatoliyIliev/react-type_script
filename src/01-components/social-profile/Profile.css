@@ -1,0 +1,38 @@
+.profile {
+  display: block;
+  width: 300px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 6px;
+  background-color: antiquewhite;
+}
+
+.profile_name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.profile_avatar {
+  width: 150px;
+  margin-top: 10px;
+}
+
+.profile_stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.profile_data {
+  display: block;
+  margin: 15px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+}

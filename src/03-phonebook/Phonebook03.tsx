@@ -21,6 +21,22 @@ class Phonebook extends Component<{}, IState> {
     filter: '',
   };
 
+  componentDidMount() {
+    const contactStorage = window.localStorage.getItem('contact');
+    const parsedContacts = JSON.parse(contactStorage || '[]');
+    console.log(parsedContacts);
+    this.setState({ contacts: parsedContacts });
+  }
+
+  componentDidUpdate(prevProps: IState, prevState: IState) {
+    const { contacts } = this.state;
+
+    if (prevState.contacts !== contacts) {
+      console.log('da');
+      window.localStorage.setItem('contact', JSON.stringify(contacts));
+    }
+  }
+
   changeFilter = (event: React.FormEvent<HTMLInputElement>) => {
     this.setState({ filter: event.currentTarget.value });
   };

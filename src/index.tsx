@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 // import Feedback from './02-feedback/Feedback';
 // import Phonebook from './02-phonebook/Phonebook';
 // import ImageFinder from './03-image-finder/ImageFinder';
-import Phonebook03 from './03-phonebook/Phonebook03';
+// import Phonebook03 from './03-phonebook/Phonebook03';
+import FeedbackHooks from './04-hooks-feedback/FeedbackHooks';
 import './index.css';
 import 'modern-normalize/modern-normalize.css';
 
@@ -14,7 +15,8 @@ ReactDOM.render(
     {/* <Feedback /> */}
     {/* <Phonebook /> */}
     {/* <ImageFinder /> */}
-    <Phonebook03 />
+    {/* <Phonebook03 /> */}
+    <FeedbackHooks />
   </React.StrictMode>,
   document.getElementById('root'),
 );

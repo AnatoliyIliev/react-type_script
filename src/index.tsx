@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 // import ImageFinder from './03-image-finder/ImageFinder';
 // import Phonebook03 from './03-phonebook/Phonebook03';
 // import FeedbackHooks from './04-hooks-feedback/FeedbackHooks';
-import PhonebookHooks from './04-hooks-phonebook/PhonebookHooks';
+// import PhonebookHooks from './04-hooks-phonebook/PhonebookHooks';
+import ImageFinderHooks from './04-hooks-images/ImageFinderHooks';
 import './index.css';
 import 'modern-normalize/modern-normalize.css';
 
@@ -18,7 +19,8 @@ ReactDOM.render(
     {/* <ImageFinder /> */}
     {/* <Phonebook03 /> */}
     {/* <FeedbackHooks /> */}
-    <PhonebookHooks />
+    {/* <PhonebookHooks /> */}
+    <ImageFinderHooks />
   </React.StrictMode>,
   document.getElementById('root'),
 );

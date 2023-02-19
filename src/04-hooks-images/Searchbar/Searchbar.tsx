@@ -1,46 +1,42 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import '../ImageFinderHooks.css';
 import { IPropsSearch } from '../types';
 
-class Searchbar extends Component<IPropsSearch> {
-  state = {
-    searchQuery: '',
-  };
+function Searchbar({ onSubmit }: IPropsSearch) {
+  const [searchQuery, setSearchQuery] = useState('');
 
-  handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
     const search = event.currentTarget.value;
-    this.setState({ searchQuery: search });
+    setSearchQuery(search);
   };
 
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    this.props.onSubmit(this.state.searchQuery);
+    onSubmit(searchQuery);
 
-    this.setState({ searchQuery: '' });
+    setSearchQuery('');
   };
 
-  render() {
-    return (
-      <header className="Searchbar">
-        <form className="SearchForm" onSubmit={this.handleSubmit}>
-          <button type="submit" className="SearchForm-button">
-            <span className="SearchForm-button-label">Search</span>
-          </button>
+  return (
+    <header className="Searchbar">
+      <form className="SearchForm" onSubmit={handleSubmit}>
+        <button type="submit" className="SearchForm-button">
+          <span className="SearchForm-button-label">Search</span>
+        </button>
 
-          <input
-            className="SearchForm-input"
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            value={this.state.searchQuery}
-            onChange={this.handleInputChange}
-          />
-        </form>
-      </header>
-    );
-  }
+        <input
+          className="SearchForm-input"
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          value={searchQuery}
+          onChange={handleInputChange}
+        />
+      </form>
+    </header>
+  );
 }
 
 export default Searchbar;

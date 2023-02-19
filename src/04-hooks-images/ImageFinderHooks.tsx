@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState, useReducer, useCallback } from 'react';
+import initialPixabay from './initialPixabay.json';
 import Searchbar from './Searchbar';
 import PixabayAPI from './services/PixabayAPI';
 import ImageGallery from './ImageGallery';
@@ -8,97 +9,85 @@ import Modal from './Modal';
 
 import './ImageFinderHooks.css';
 
-import { IProps, IQuery, IState } from './types';
+function countPage(prevState: number, nextState: number) {
+  return prevState + nextState;
+}
 
-class ImageFinder extends Component<IProps, IState> {
-  state = {
-    searchQuery: '',
-    PixabayImage: [],
-    perPage: 12,
-    page: 1,
-    error: '',
-    showModal: false,
-    largeImage: { largeImageURL: '', tags: '' },
-    status: 'idle',
-  };
+function ImageFinder() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [PixabayImage, setPixabayImage] = useState(initialPixabay);
+  const [perPage] = useState(12);
+  const [page, setPage] = useReducer(countPage, 1);
+  const [error, setError] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [largeImage, setLargeImage] = useState({ largeImageURL: '', tags: '' });
+  const [status, setStatus] = useState('idle');
 
-  componentDidUpdate(prevProps: IQuery, prevState: IQuery) {
-    const { searchQuery } = this.state;
-    const prevQuery = prevState.searchQuery;
-
-    if (prevQuery !== searchQuery) {
-      this.setState({
-        PixabayImage: [],
-      });
-
-      this.fetchUpdate();
+  useEffect(() => {
+    if (searchQuery === '') {
+      return;
     }
-  }
+    setPixabayImage([]);
+    fetchUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
 
-  fetchUpdate = async () => {
-    const { searchQuery, page, perPage } = this.state;
-    this.setState({ status: 'pending' });
+  const fetchUpdate = useCallback(async () => {
+    setStatus('pending');
 
     try {
       const image = await PixabayAPI(searchQuery, page, perPage);
 
-      this.setState(prevState => ({
-        PixabayImage: [...prevState.PixabayImage, ...image.hits],
-        page: prevState.page + 1,
-        status: 'resolved',
-      }));
+      setPixabayImage(PixabayImage => [...PixabayImage, ...image.hits]);
+
+      setPage(1);
+
+      setStatus('resolved');
     } catch (error) {
       let message = '';
 
       if (error instanceof Error) {
         message = error.message;
       }
-
-      this.setState({ error: message, status: 'rejected' });
+      setError(message);
+      setStatus('rejected');
     }
+  }, [page, perPage, searchQuery]);
+
+  const submitForm = (searchQuery: string) => {
+    setSearchQuery(searchQuery);
+    setPage(1);
   };
 
-  submitForm = (searchQuery: string) => {
-    this.setState({ searchQuery, page: 1 });
+  const toggleModal = () => {
+    setShowModal(!showModal);
   };
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
+  const changeLargeImage = (largeImageURL: string, tags: string) => {
+    setLargeImage({ largeImageURL, tags });
+    toggleModal();
   };
 
-  changeLargeImage = (largeImageURL: string, tags: string) => {
-    this.setState({ largeImage: { largeImageURL, tags } });
-    this.toggleModal();
-  };
+  return (
+    <div className="App">
+      <Searchbar onSubmit={submitForm} />
+      {status === 'idle' && <div>Enter data to search</div>}
 
-  render() {
-    const { PixabayImage, showModal, largeImage, status, error } = this.state;
+      {status === 'rejected' && error}
 
-    return (
-      <div className="App">
-        <Searchbar onSubmit={this.submitForm} />
-        {status === 'idle' && <div>Enter data to search</div>}
-
-        {status === 'rejected' && error}
-
-        {status === 'resolved' && (
-          <>
-            <ImageGallery
-              PixabayImage={PixabayImage}
-              changeLargeImage={this.changeLargeImage}
-            />
-            <Button onClick={this.fetchUpdate} />
-          </>
-        )}
-        {status === 'pending' && <Loader />}
-        {showModal && (
-          <Modal onClose={this.toggleModal} image={largeImage}></Modal>
-        )}
-      </div>
-    );
-  }
+      {status === 'resolved' && (
+        <>
+          <ImageGallery
+            PixabayImage={PixabayImage}
+            changeLargeImage={changeLargeImage}
+          />
+          <Button onClick={fetchUpdate} />
+        </>
+      )}
+      {status === 'pending' && <Loader />}
+      {showModal && <Modal onClose={toggleModal} image={largeImage}></Modal>}
+    </div>
+  );
 }
 
 export default ImageFinder;

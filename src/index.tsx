@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import { BrowserRouter } from 'react-router-dom';
 // import Components from './01-components/Components';
 // import Feedback from './02-feedback/Feedback';
 // import Phonebook from './02-phonebook/Phonebook';
@@ -14,6 +15,7 @@ import 'modern-normalize/modern-normalize.css';
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* <BrowserRouter> */}
     {/* <Components /> */}
     {/* <Feedback /> */}
     {/* <Phonebook /> */}
@@ -23,6 +25,7 @@ ReactDOM.render(
     {/* <PhonebookHooks /> */}
     {/* <ImageFinderHooks /> */}
     <Movies />
+    {/* </BrowserRouter> */}
   </React.StrictMode>,
   document.getElementById('root'),
 );

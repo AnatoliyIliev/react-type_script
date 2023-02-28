@@ -1,5 +1,3 @@
-import { BrowserRouter } from 'react-router-dom';
-
 function Movies() {
   return <>Movies</>;
 }

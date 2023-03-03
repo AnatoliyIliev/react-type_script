@@ -70,9 +70,7 @@
   "lint-staged": {
     "*.ts": "eslint --cache --fix",
     "*.{ts, tsx, scss, md}": [
-      "prettier --write --config .prettierr",
-      "tslint --project tslint.ide_only.json --fix --force",
-      "sh lint.sh partner-account",
+      "prettier --write --config .prettierrc",
       "git add"
     ]
   }

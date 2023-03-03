@@ -16,7 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "noImplicitAny": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["src"]
 }

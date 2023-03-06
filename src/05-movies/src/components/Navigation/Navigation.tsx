@@ -4,19 +4,17 @@ import styles from './Navigation.module.scss';
 function Navigation() {
   return (
     <nav>
-      <NavLink className={styles.navigation} to="/">
+      <NavLink
+        className={({ isActive }) => (isActive ? styles.activeStyle : styles.navigation)}
+        to="/"
+        end
+      >
         Home
       </NavLink>
-      <NavLink className={styles.navigation} to="/movies">
-        Movies
-      </NavLink>
-      <NavLink className={styles.navigation} to="/movies/:movieId/cast">
-        Movies
-      </NavLink>
-      <NavLink className={styles.navigation} to="/movies/:movieId/reviews">
-        Movies
-      </NavLink>
-      <NavLink className={styles.navigation} to="/movies/:movieId">
+      <NavLink
+        className={({ isActive }) => (isActive ? styles.activeStyle : styles.navigation)}
+        to="/movies"
+      >
         Movies
       </NavLink>
     </nav>

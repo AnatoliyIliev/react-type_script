@@ -26,3 +26,7 @@ export enum Status {
   resolved,
   rejected,
 }
+
+export type PropsMovies = {
+  movies: Movie[];
+};

@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import FindMovie from 'components/FindMovie';
 
 import styles from './MoviesPage.module.scss';
 
 function MoviesPage() {
-  const [seargeQuary, setSeargeQuary] = useState('');
+  // const [seargeQuary, setSeargeQuary] = useState('');
 
   return (
     <>
+      <FindMovie />
       {/* <NavLink
         className={({ isActive }) => (isActive ? styles.activeStyle : styles.navigation)}
         to="/movies/:movieId"

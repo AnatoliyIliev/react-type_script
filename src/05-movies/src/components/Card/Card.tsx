@@ -2,12 +2,20 @@ import { Link } from 'react-router-dom';
 import { PropsMovies } from '../../types';
 import styles from './Card.module.scss';
 
+function chooseColor(value: number) {
+  if (value < 5) return 'red';
+  else if (value >= 5 && value < 8) return 'orange';
+  else if (value >= 8) return 'green';
+}
+
 function Card({ movies }: PropsMovies) {
   return (
     <ul className={styles.movies}>
       {movies &&
         movies.map((movie) => {
           const [year, month, date] = movie.release_date.split('-');
+          const numberOfAverage = Number(movie.vote_average.toFixed(1));
+          const averageColorStyle = chooseColor(numberOfAverage);
 
           return (
             <li key={movie.id}>
@@ -20,9 +28,12 @@ function Card({ movies }: PropsMovies) {
                   className={styles.movie_image}
                 />
                 <h2 className={styles.movie_title}>{movie.title}</h2>
-                <div>{`${date} ${month} ${year}`}</div>
-                <div>{movie.vote_average}</div>
-                <div>{movie.vote_count}</div>
+                <div className={styles.mavie_date}>{`${date} ${month} ${year}`}</div>
+                <div className={styles.movie_circle}>
+                  <span className={styles.movie_average} style={{ color: `${averageColorStyle}` }}>
+                    {numberOfAverage}
+                  </span>
+                </div>
               </Link>
             </li>
           );
